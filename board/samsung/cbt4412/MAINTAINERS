@@ -1,0 +1,6 @@
+CBT4412 BOARD
+M:	Minkyu Kang <mk7.kang@samsung.com>
+S:	Maintained
+F:	board/samsung/cbt4412/
+F:	include/configs/cbt4412.h
+F:	configs/cbt4412_defconfig

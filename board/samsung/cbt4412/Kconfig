@@ -1,0 +1,12 @@
+if TARGET_CBT4412
+
+config SYS_BOARD
+	default "cbt4412"
+
+config SYS_VENDOR
+	default "samsung"
+
+config SYS_CONFIG_NAME
+	default "cbt4412"
+
+endif
