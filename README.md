@@ -2,7 +2,7 @@
 
 代码适合的开发板：
 
-cbt4412或者友善之臂Tiny4412或类似的板子。
+cbt4412或者友善之臂Tiny4412或类似的板子。DM9000A不适用于Tiny4412。
 
 CPU处理器：Samsung ARM Cortex-A9 四核Exynos 4412 Quad-core处理器
 
