@@ -76,6 +76,9 @@ config TARGET_ODROID
 config TARGET_CBT4412
 	bool "Exynos4412 CBT4412 board"	
 	select SUPPORT_SPL
+	select ETH
+	select NET
+	select NETDEVICES
 
 endchoice
 endif

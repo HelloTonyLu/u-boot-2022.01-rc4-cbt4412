@@ -679,7 +679,9 @@ config ARCH_EXYNOS
 	select DM
 	select DM_GPIO
 	select DM_I2C
-	select DM_ETH
+	select ETH
+	select NET
+	select NETDEVICES
 	select DM_KEYBOARD
 	select DM_SERIAL
 	select DM_SPI

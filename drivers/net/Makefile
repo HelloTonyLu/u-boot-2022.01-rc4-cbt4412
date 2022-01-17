@@ -3,6 +3,7 @@
 # (C) Copyright 2006
 # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
 
+
 obj-y += phy/
 
 obj-$(CONFIG_ALTERA_TSE) += altera_tse.o

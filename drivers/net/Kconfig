@@ -5,6 +5,8 @@ source "drivers/net/fsl-mc/Kconfig"
 config ETH
 	def_bool y
 
+
+
 config DM_ETH
 	bool "Enable Driver Model for Ethernet drivers"
 	depends on DM

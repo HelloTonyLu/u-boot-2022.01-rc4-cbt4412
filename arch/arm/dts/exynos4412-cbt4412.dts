@@ -24,6 +24,23 @@
 		console = "/serial@13800000";
 		
 	};
+	
+	srom-cs1@5000000{
+	compatible = "simple-bus";
+	#address-cells = <1>;
+	#size-cells = <1>;
+	reg = <0x5000000 0x1000000>;
+	ranges;
+	ethernet@5000000{
+		compatible = "davicom,dm9000";
+		reg = <0x5000000 0x2 0x5000004 0x2>;
+		interrupt-parent = <&gpx0>;
+		interrupts = <6 4>;
+		davicom,no-eeprom;
+		mac-address = [00 11 22 33 44 55];
+		};
+	
+	};
 
 };
 

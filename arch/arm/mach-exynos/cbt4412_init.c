@@ -1,41 +1,27 @@
-// SPDX-License-Identifier: GPL-2.0+
-/*
- * 
- */
-
+#include <asm/system.h>
+#include <init.h>
+#include "configs/cbt4412.h"
+#include "dm9000x.h"
 #include <common.h>
-#include <asm/io.h>
-#include <asm/gpio.h>
-#include <asm/arch/cpu.h>
-#include <asm/arch/mmc.h>
-#include <asm/arch/periph.h>
-#include <asm/arch/pinmux.h>
-#include <usb.h>
+#include <command.h>
 #include <net.h>
-#include <mach/cpu.h>
-#include <../../../drivers/net/dm9000x.h>
+#include <asm/io.h>
+#include <linux/delay.h>
 
-static void dm9000aep_pre_init(void);
-static int cbt4412_init(void);
-static void exynos_config_sromc(u32 srom_bank, u32 srom_bw_conf, u32 srom_bc_conf);
+#include "dm9000x.h"
+#include <debug_uart.h>
 
+void dm9000aep_pre_init(void);
+void exynos_config_sromc(u32 srom_bank, u32 srom_bw_conf, u32 srom_bc_conf);
+int board_eth_init(struct bd_info *bis);
+extern int dm9000_initialize(struct bd_info *bis);
+extern void dm9000_autoinit_mac(struct bd_info *bis);
+
+DECLARE_GLOBAL_DATA_PTR;
+
+#ifdef CONFIG_TARGET_CBT4412
 /* DM9000 Config */
 #ifdef CONFIG_CMD_NET
-#undef CONFIG_NET
-
-#define CONFIG_DRIVER_DM9000	1
-#define CONFIG_DM9000_BASE	0x05000000 		
-#define DM9000_IO		CONFIG_DM9000_BASE	/* #undef CONFIG_DM_ETH */
-#define DM9000_DATA		(CONFIG_DM9000_BASE + 4)/*  */
-#define CONFIG_DM9000_USE_16BIT				/*  */
-#define CONFIG_DM9000_NO_SROM	1			/*  */
-#define CONFIG_ETHADDR		11:22:33:44:55:66
-#define CONFIG_IPADDR		192.168.6.187
-#define CONFIG_SERVERIP		192.168.6.186
-#define CONFIG_GATEWAYIP	192.168.6.1
-#define CONFIG_NETMASK		255.255.255.0
-
-#define EXYNOS4412_SROMC_BASE 	0X12570000
 
 #define DM9000_Tacs     (0x1)   // address set-up
 #define DM9000_Tcos     (0x1)   // chip selection set-up
@@ -45,30 +31,32 @@ static void exynos_config_sromc(u32 srom_bank, u32 srom_bw_conf, u32 srom_bc_con
 #define DM9000_Tacp     (0x9)   // page mode access cycle
 #define DM9000_PMC      (0x1)   // normal(1data)page mode configuration
 
-
 #endif
 
-DECLARE_GLOBAL_DATA_PTR;
-
-#ifdef CONFIG_TARGET_CBT4412
 struct exynos_sromc {
 	unsigned int bw;
 	unsigned int bc[6];
 };
 
-static int cbt4412_init(void)
-{
-
-	gd->bd->bi_boot_params = (PHYS_SDRAM_1 + 0x100UL);
-
+#ifdef CONFIG_CMD_NET 
+int board_eth_init(struct bd_info *bis)
+{	
+	int rc;
 #ifdef CONFIG_DRIVER_DM9000
 	dm9000aep_pre_init();
-#endif
-	return 0;
-}
+	rc = dm9000_initialize(bis);	
+	printascii("dm9000_initialize(bis) was runned\r\n");
+	dm9000_autoinit_mac(bis);
 #endif
 
-static void dm9000aep_pre_init(void)
+#if defined(CONFIG_RESET_PHY_R)
+	printascii("Reset Ethernet PHY\r\n");
+	reset_phy();
+#endif
+	return rc;                                                               
+}   
+ 
+void dm9000aep_pre_init(void)
 {
 	unsigned char smc_bank_num = 1;
 	unsigned int     smc_bw_conf=0;
@@ -104,7 +92,7 @@ static void dm9000aep_pre_init(void)
  *  srom_bc_conf  - SMC Bank Control reg configuration value
  */
 
-static void exynos_config_sromc(u32 srom_bank, u32 srom_bw_conf, u32 srom_bc_conf)
+void exynos_config_sromc(u32 srom_bank, u32 srom_bw_conf, u32 srom_bc_conf)
 {
 	unsigned int tmp;
 	struct exynos_sromc *srom = (struct exynos_sromc *)(EXYNOS4412_SROMC_BASE);
@@ -120,5 +108,7 @@ static void exynos_config_sromc(u32 srom_bank, u32 srom_bw_conf, u32 srom_bc_con
 	 * register */
 	srom->bc[srom_bank] = srom_bc_conf;
 }
+#endif
 
 
+#endif //end of ifdef CONFIG_CMD_NET 

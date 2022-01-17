@@ -6,6 +6,7 @@ SUBLEVEL =
 EXTRAVERSION = -rc4
 NAME =
 
+ARCH = arm
 
 # *DOCUMENTATION*
 # To see a list of typical targets execute "make help"
@@ -272,6 +273,10 @@ export	HOSTARCH HOSTOS
 # set default to nothing for native builds
 ifeq ($(HOSTARCH),$(ARCH))
 CROSS_COMPILE ?=
+endif
+
+ifeq (arm,$(ARCH))
+CROSS_COMPILE := arm-none-linux-gnueabihf-
 endif
 
 KCONFIG_CONFIG	?= .config

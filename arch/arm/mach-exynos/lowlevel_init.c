@@ -39,6 +39,8 @@
 #include "common_setup.h"
 #include "exynos5_setup.h"
 
+DECLARE_GLOBAL_DATA_PTR;
+
 /* These are the things we can do during low-level init */
 enum {
 	DO_WAKEUP	= 1 << 0,
@@ -217,19 +219,21 @@ int do_lowlevel_init(void)
 
 	if (actions & DO_CLOCKS) {
 		system_clock_init();
+
 #ifdef CONFIG_DEBUG_UART
-#if (defined(CONFIG_SPL_BUILD) && defined(CONFIG_SPL_SERIAL_SUPPORT)) || \
-    !defined(CONFIG_SPL_BUILD)
+
 
 #ifdef CONFIG_TARGET_CBT4412
-		exynos_pinmux_config(PERIPH_ID_UART0, PINMUX_FLAG_NONE);
+		exynos_pinmux_config(PERIPH_ID_UART0, PINMUX_FLAG_NONE);		
 #else
 		exynos_pinmux_config(PERIPH_ID_UART3, PINMUX_FLAG_NONE);
 #endif		
 		debug_uart_init();
-
+		printascii("debug_uart_init()\r\n");	
 #endif
-#endif
+		
+		/*dm9000aep_pre_init();
+		printascii("lowlevel_init ... dm9000aep_pre_init\r\n");*/
 		mem_ctrl_init(actions & DO_MEM_RESET);
 		/*tzpc_init();*/
 	}
