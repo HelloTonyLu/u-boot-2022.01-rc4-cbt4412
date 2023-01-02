@@ -8,7 +8,7 @@
 #include <asm/io.h>
 #include <linux/delay.h>
 
-#include "dm9000x.h"
+
 #include <debug_uart.h>
 
 void dm9000aep_pre_init(void);
@@ -64,7 +64,7 @@ void dm9000aep_pre_init(void)
 
 	/* gpio configuration */
 	writel(0x00220020, 0x11000000 + 0x120);//GPY0CON
-	writel(0x00002222, 0x11000000 + 0x140);//GPY1CON
+	//writel(0x00002222, 0x11000000 + 0x140);//GPY1CON
 	/* 16 Bit bus width */
 	writel(0x22222222, 0x11000000 + 0x180);//GPY3CON
 	writel(0x0000FFFF, 0x11000000 + 0x188);//GPY3PUD

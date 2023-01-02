@@ -231,9 +231,6 @@ int do_lowlevel_init(void)
 		debug_uart_init();
 		printascii("debug_uart_init()\r\n");	
 #endif
-		
-		/*dm9000aep_pre_init();
-		printascii("lowlevel_init ... dm9000aep_pre_init\r\n");*/
 		mem_ctrl_init(actions & DO_MEM_RESET);
 		/*tzpc_init();*/
 	}
