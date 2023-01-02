@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 // SPDX-License-Identifier: GPL-2.0+
 /*
  * 
@@ -123,5 +121,4 @@ static void exynos_config_sromc(u32 srom_bank, u32 srom_bw_conf, u32 srom_bc_con
 	srom->bc[srom_bank] = srom_bc_conf;
 }
 
->>>>>>> cc1cb277... add DM9000A driver
 
