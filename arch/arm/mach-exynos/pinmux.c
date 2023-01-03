@@ -889,18 +889,12 @@ static int exynos4x12_pinmux_config(int peripheral, int flags)
 int exynos_pinmux_config(int peripheral, int flags)
 {
 	if (cpu_is_exynos5()) {
-#ifdef CONFIG_DEBUG_UART
-		printascii("pinmux.c...\r\ncpu_is_exynos5\r\n");
-#endif 
 		if (proid_is_exynos542x())
 			return exynos5420_pinmux_config(peripheral, flags);
 		else if (proid_is_exynos5250())
 			return exynos5_pinmux_config(peripheral, flags);
 	} else if (cpu_is_exynos4()) {
 		if (proid_is_exynos4412()){
-#ifdef CONFIG_DEBUG_UART
-			printascii("pinmux.c...\r\nproid_is_exynos4412\r\n");
-#endif 
 			return exynos4x12_pinmux_config(peripheral, flags);
 		}
 		else

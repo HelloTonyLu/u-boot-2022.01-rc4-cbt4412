@@ -57,7 +57,7 @@ struct mem_timings mem = {
 /*简易测试tiny4412内存情况,如果读出的值正常，即初步判断内存初始化正常*/
 void tiny4412_mem_test(void)
 {
-#ifdef CONFIG_DEBUG_UART
+#ifdef CONFIG_DEBUG_UART_rc4
 	unsigned int i;
 
 	printascii("Simple Memory test start...\r\n");

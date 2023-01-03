@@ -4,7 +4,7 @@
 
 ifdef CONFIG_SPL_BUILD
 # necessary to create built-in.o
-obj- := __dummy__.o
+obj- := __dummy__.o 
 
 hostprogs-y := tools/mkcbt4412spl
 always := $(hostprogs-y)
@@ -18,3 +18,4 @@ $(obj)/tools/mkcbt4412spl: HOSTCFLAGS:=$(filter-out -O2,$(HOSTCFLAGS))
 else
 obj-y	+= cbt4412.o
 endif
+

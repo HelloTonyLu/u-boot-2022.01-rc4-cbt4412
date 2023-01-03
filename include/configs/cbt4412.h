@@ -10,6 +10,22 @@
 
 #include <configs/exynos4-common.h>
 
+/* DM9000 Config */
+#ifdef CONFIG_CMD_NET
+#define CONFIG_DRIVER_DM9000 y
+#define CONFIG_DM9000_BASE	0x05000000 		
+#define DM9000_IO		CONFIG_DM9000_BASE	/*  */
+#define DM9000_DATA		(CONFIG_DM9000_BASE + 4)/*  */
+#define CONFIG_DM9000_USE_16BIT				/*  */
+#define CONFIG_DM9000_NO_SROM	1			/*  */
+#define CONFIG_ETHADDR		00:0c:29:d3:fe:1d	/*  */
+#define CONFIG_IPADDR		192.168.1.230
+#define CONFIG_SERVERIP		192.168.1.7
+#define CONFIG_GATEWAYIP	192.168.1.1
+#define CONFIG_NETMASK		255.255.255.0
+
+#define EXYNOS4412_SROMC_BASE 	0X12570000
+#endif
 
 /*#undef CONFIG_SKIP_LOWLEVEL_INIT
 #undef CONFIG_SKIP_LOWLEVEL_INIT_ONLY
@@ -48,10 +64,10 @@
 #define COPY_BL2_FNPTR_ADDR	0x02020030
 
 #define CONFIG_EXTRA_ENV_SETTINGS \
-	"loadaddr=0x40007000\0" \
-	"rdaddr=0x48000000\0" \
-	"kerneladdr=0x40007000\0" \
-	"ramdiskaddr=0x48000000\0" \
+	"loadaddr=0x40008000\0" \
+	"rdaddr=0x41000000\0" \
+	"kerneladdr=0x40008000\0" \
+	"ramdiskaddr=0x41000000\0" \
 	"console=ttySAC0,115200n8\0" \
 	"mmcdev=0\0" \
 	"bootenv=uEnv.txt\0" \
@@ -62,21 +78,7 @@
         "bootscript=echo Running bootscript from mmc${mmcdev} ...; " \
                 "source ${loadaddr}\0"
 #define CONFIG_BOOTCOMMAND \
-	"if mmc rescan; then " \
-		"echo SD/MMC found on device ${mmcdev};" \
-		"if run loadbootenv; then " \
-			"echo Loaded environment from ${bootenv};" \
-			"run importbootenv;" \
-		"fi;" \
-		"if test -n $uenvcmd; then " \
-			"echo Running uenvcmd ...;" \
-			"run uenvcmd;" \
-		"fi;" \
-		"if run loadbootscript; then " \
-			"run bootscript; " \
-		"fi; " \
-	"fi;" \
-	"load mmc ${mmcdev} ${loadaddr} uImage; bootm ${loadaddr} "
+	"bootm ${loadaddr} "
 
 #define CONFIG_CLK_1000_400_200
 

@@ -391,8 +391,8 @@ freq(SCLK_ONENAND)	= 160MHz
 				| (MMC0_RATIO << 0))
 
 /* CLK_DIV_FSYS2  MMC2=SDMMC:20MHz*/
-#define MMC2_RATIO		0x7
-#define MMC2_PRE_RATIO		0x4
+#define MMC2_RATIO		0x9
+#define MMC2_PRE_RATIO		0x3
 #define MMC3_RATIO		0xF
 #define MMC3_PRE_RATIO		0x0
 #define CLK_DIV_FSYS2_VAL	((MMC3_PRE_RATIO << 24) \

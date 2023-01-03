@@ -6,6 +6,8 @@ SUBLEVEL =
 EXTRAVERSION = -rc4
 NAME =
 
+ARCH := arm
+CROSS_COMPILE :=arm-none-linux-gnueabihf-
 
 # *DOCUMENTATION*
 # To see a list of typical targets execute "make help"

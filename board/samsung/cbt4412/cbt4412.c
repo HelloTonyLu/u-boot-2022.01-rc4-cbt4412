@@ -12,6 +12,8 @@
 #include <asm/arch/pinmux.h>
 #include <usb.h>
 
+
+
 int exynos_init(void)
 {
 	return 0;
@@ -28,3 +30,5 @@ int exynos_early_init_f(void)
 	return 0;
 }
 #endif
+
+
