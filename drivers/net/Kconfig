@@ -556,19 +556,9 @@ config RTL8169
 	  This driver supports Realtek 8169 series gigabit ethernet family of
 	  PCI/PCIe chipsets/adapters.
 	
-config DM9000 
+config DRIVER_DM9000 
 	  bool "DM9000 controller driver"
 
-if DRIVER_DM9000
-
-if !DM_ETH
-config DM9000_BASE
-	hex "DM9000 Base Address"
-	help
-	  Define this to hold the physical address
-	  of the device (I/O space)
-endif #DM_ETH
-endif #DRIVER_DM9000
 
 config SMC911X 
 	bool "SMSC LAN911x and LAN921x controller driver"
