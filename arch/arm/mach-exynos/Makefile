@@ -10,8 +10,8 @@ obj-$(CONFIG_ARM64)	+= mmu-arm64.o
 obj-$(CONFIG_EXYNOS5420)	+= sec_boot.o
 ifdef CONFIG_TARGET_CBT4412
 obj-$(CONFIG_S5P)	+= s5p_gpio.o
-obj-y	+= cbt4412_init.o
-obj-y	+= dm9000x.o
+#obj-y	+= cbt4412_init.o
+#obj-y	+= dm9000x.o
 $(warning CONFIG_TARGET_CBT4412 is defined)
 endif
 

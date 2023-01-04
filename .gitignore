@@ -42,6 +42,7 @@ fit-dtb.blob*
 /SPL*
 /System.map
 /u-boot*
+!/u-boot.bin
 /boards.cfg
 /*.log
 
@@ -55,6 +56,8 @@ fit-dtb.blob*
 # Generated files
 #
 /spl/
+!/spl/u-boot-spl.bin
+!/sd_fuse/tiny4412/bl2.bin
 /tpl/
 /defconfig
 
