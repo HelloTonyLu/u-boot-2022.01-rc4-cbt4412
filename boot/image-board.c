@@ -581,12 +581,12 @@ int boot_ramdisk_high(struct lmb *lmb, ulong rd_data, ulong rd_len,
 		initrd_high = env_get_bootm_mapsize() + env_get_bootm_low();
 	}
 
-	debug("## initrd_high = 0x%08lx, copy_to_ram = %d\n",
+	printf("## initrd_high = 0x%08lx, copy_to_ram = %d\n",
 	      initrd_high, initrd_copy_to_ram);
 
 	if (rd_data) {
 		if (!initrd_copy_to_ram) {	/* zero-copy ramdisk support */
-			debug("   in-place initrd\n");
+			printf("   in-place initrd\n");
 			*initrd_start = rd_data;
 			*initrd_end = rd_data + rd_len;
 			lmb_reserve(lmb, rd_data, rd_len);
@@ -626,7 +626,7 @@ int boot_ramdisk_high(struct lmb *lmb, ulong rd_data, ulong rd_len,
 		*initrd_start = 0;
 		*initrd_end = 0;
 	}
-	debug("   ramdisk load start = 0x%08lx, ramdisk load end = 0x%08lx\n",
+	printf("   ramdisk load start = 0x%08lx, ramdisk load end = 0x%08lx\n",
 	      *initrd_start, *initrd_end);
 
 	return 0;

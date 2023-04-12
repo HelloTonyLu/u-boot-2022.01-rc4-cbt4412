@@ -126,3 +126,11 @@
 	bus-width = <8>;
 	status = "okay";
 };
+
+&sdhci2 {
+	pinctrl-0 = <&gpk2>;
+	samsung,bus-width = <4>;
+	samsung,timing = <1 2 3>;
+	cd-gpio = <&gpk2 2 0>;
+	status = "okay";
+};
